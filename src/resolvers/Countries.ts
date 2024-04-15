@@ -1,4 +1,4 @@
-import { Arg, Mutation, Resolver } from "type-graphql";
+import { Arg, Mutation, Query, Resolver } from "type-graphql";
 import { CountryCreateInput } from "../input/CountryCreateInput";
 import { Country } from "../entities/country";
 import { countryRepository } from "../repositories/countryRepository";
@@ -7,6 +7,10 @@ import { countryRepository } from "../repositories/countryRepository";
 @Resolver()
 export class CountryResolver {
 
+  @Query(() => [Country])
+  async getAllCountries(){
+     return await countryRepository.find()
+  }
 
   // CREATE a country
   @Mutation(() => Country)
