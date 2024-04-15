@@ -7,7 +7,7 @@ const dataSource = new DataSource({
   synchronize: true,
   entities: [`./src/entities/*{.js,.ts}`],
   // entities: [Country],
-  logging: ["query", "error"],
+  // logging: ["query", "error"],
 });
 
 export default dataSource;
