@@ -5,12 +5,15 @@ import { ContinentCreateInput } from "../input/ContinentCreateInput";
 
 @Resolver()
 export class ContinentResolver {
+
+   // READ All continents
    @Query(() => [Continent])
    async getAllContinents() {
       const continents = await continentRepository.find()
       return continents
    }
 
+   // CREATE one continent
    @Mutation(() => Continent)
    async createContinent(
       @Arg("data") data: ContinentCreateInput) {
