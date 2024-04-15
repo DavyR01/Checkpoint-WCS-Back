@@ -9,8 +9,18 @@ export class CountryResolver {
 
   // READ all countries
   @Query(() => [Country])
-  async getAllCountries() {
-    return await countryRepository.find()
+  async getCountries(@Arg("continent", { nullable: true }) continentRepository?: string) {
+    if (continentRepository) {
+      return await countryRepository.find({
+        where: { continents: { code: continentRepository } },
+        relations: {
+          continents: true
+        }
+      });
+    } else {
+      const countries = await countryRepository.find({relations: {continents: true}});
+      return countries;
+    }
   }
 
   // READ one country
