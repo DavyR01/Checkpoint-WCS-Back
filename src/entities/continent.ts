@@ -1,5 +1,6 @@
 import { Field, ObjectType } from "type-graphql";
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryColumn } from "typeorm";
+import { Country } from "./country";
 
 @Entity()
 @ObjectType()
@@ -11,4 +12,7 @@ export class Continent {
   @Column()
   @Field()
   name: string;
+
+  @OneToMany(() => Country, country => country.continents)
+  countries: Country[];
 }
