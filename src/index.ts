@@ -3,6 +3,7 @@ import { buildSchema } from "type-graphql";
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 import dataSource from "./database/dbCheckpoint";
+import { CountryResolver } from "./resolvers/Country";
 
 const start = async () => {
   await dataSource.initialize();
