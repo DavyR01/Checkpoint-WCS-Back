@@ -32,6 +32,28 @@ export class CountryResolver {
       const country = Country.save({
          ...newCountry
       })
-      return country
+      return await country
+   }
+
+   // En retournant une chaine de caractères
+   @Mutation(() => String)
+   async deleteOneCountry(@Arg("id") idToDelete: number) {
+      const countryToDelete = await Country.findOneByOrFail({
+         id: idToDelete
+      })
+      countryToDelete.remove()
+      console.log('delete country OK');
+      return "The country has been deleted"
+   }
+
+   // En retournant la Country supprimée en sortie
+   @Mutation(() => Country)
+   async deleteOneCountry2(@Arg("id") idToDelete: number) {
+      const countryToDelete = await Country.findOneByOrFail({
+         id: idToDelete
+      })
+      countryToDelete.remove()
+      console.log('delete country OK');
+      return countryToDelete
    }
 }
