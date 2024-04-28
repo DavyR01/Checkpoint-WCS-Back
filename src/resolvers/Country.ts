@@ -1,6 +1,7 @@
 import { AddCountryInput } from "../inputs/CountryAdd";
 import { Country } from "../entities/country";
 import { Arg, Mutation, Query, Resolver } from "type-graphql";
+import { UpdateCountryInput } from "../inputs/CountryUpdate";
 
 @Resolver()
 export class CountryResolver {
@@ -57,27 +58,57 @@ export class CountryResolver {
       return countryToDelete
    }
 
-      // En retournant un boolean
-      @Mutation(() => Boolean)
-      async deleteOneCountry3(@Arg("id") idToDelete: number) {
-         const countryToDelete = await Country.findOne({
-            where: {
-               id: idToDelete
-            }
-         })
-         if(!countryToDelete){
-            throw new Error ("no country founded")
-         } else {
-            countryToDelete.remove()
-            console.log('delete country OK');
+   // En retournant un boolean
+   @Mutation(() => Boolean)
+   async deleteOneCountry3(@Arg("id") idToDelete: number) {
+      const countryToDelete = await Country.findOne({
+         where: {
+            id: idToDelete
          }
-         return true
+      })
+      if (!countryToDelete) {
+         throw new Error("no country founded")
+      } else {
+         countryToDelete.remove()
+         console.log('delete country OK');
       }
-   
+      return true
+   }
 
-   // @Mutation(() => Country)
-   // async updateOneCountry(@Arg("id") idToUpdate: number) {
-   //    // const countryToUpdate = await Country.
-   // }
+
+   // Gestion erreur avec try catch
+   @Mutation(() => Country)
+   async updateOneCountry(
+      @Arg("id") idToUpdate: number,
+      @Arg("data") data: UpdateCountryInput) {
+         let countryToUpdate: any=""
+         try {
+            countryToUpdate = await Country.findOne({
+               where: {id: idToUpdate}
+            })
+            Object.assign(countryToUpdate, data)
+            await countryToUpdate.save()
+         } catch (error) {
+            throw new Error('Error during update : Country doesn\'t exist ?')
+         }
+         return countryToUpdate
+   }
+
+
+   @Mutation(() => Country)
+   async updateOneCountry2(
+      @Arg("id") idToUpdate: number,
+      @Arg("data") data: UpdateCountryInput) {
+      const countryToUpdate = await Country.findOne({
+         where: {id: idToUpdate}
+      })
+      if (!countryToUpdate) {
+         throw new Error ('Error during update the country !!')
+      }
+      Object.assign(countryToUpdate, data)
+      countryToUpdate.save()
+      return countryToUpdate
+   }
+
 
 }

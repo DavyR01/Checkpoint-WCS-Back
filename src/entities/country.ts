@@ -16,7 +16,7 @@ import {
   //  id: string;
  
    @Field()
-   @Column()
+   @Column({type: "varchar"})
    code: string;
  
    @Field()
