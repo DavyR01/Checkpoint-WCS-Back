@@ -57,9 +57,27 @@ export class CountryResolver {
       return countryToDelete
    }
 
-   @Mutation(() => Country)
-   async updateOneCountry(@Arg("id") idToUpdate: number) {
-      // const countryToUpdate = await Country.
-   }
+      // En retournant un boolean
+      @Mutation(() => Boolean)
+      async deleteOneCountry3(@Arg("id") idToDelete: number) {
+         const countryToDelete = await Country.findOne({
+            where: {
+               id: idToDelete
+            }
+         })
+         if(!countryToDelete){
+            throw new Error ("no country founded")
+         } else {
+            countryToDelete.remove()
+            console.log('delete country OK');
+         }
+         return true
+      }
+   
+
+   // @Mutation(() => Country)
+   // async updateOneCountry(@Arg("id") idToUpdate: number) {
+   //    // const countryToUpdate = await Country.
+   // }
 
 }
