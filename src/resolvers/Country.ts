@@ -10,10 +10,19 @@ export class CountryResolver {
    }
 
    @Query(() => Country)
-   async getOneCountry(@Arg("code", {defaultValue: "FR"}) code:string): Promise<Country | null> {
+   async getOneCountry(@Arg("code", { defaultValue: "FR" }) code: string): Promise<Country | null> {
       return await Country.findOne({
          where: {
             code
+         }
+      })
+   }
+
+   @Query(() => [Country])
+   async getCountriesByContinent(@Arg("continent", { defaultValue: "" }) continent?: string): Promise<Country[]> {
+      return await Country.find({
+         where: {
+            continent
          }
       })
    }
