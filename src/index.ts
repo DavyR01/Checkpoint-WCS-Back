@@ -11,10 +11,11 @@ const start = async () => {
 
    const countries = await Country.find();
    if (countries.length === 0) {
-      const country = new Country;
+      const country = new Country();
       country.code = "FR";
       country.emoji = 'flagFr.png';
       country.name = "France"
+      country.save();
    }
 
 
