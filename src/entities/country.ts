@@ -12,6 +12,8 @@ import {
    @Field()
    @PrimaryGeneratedColumn()
    id: number;
+   //  @PrimaryGeneratedColumn("uuid")
+  //  id: string;
  
    @Field()
    @Column()
@@ -21,8 +23,8 @@ import {
    @Column()
    name: string;
 
-   @Field()
-   @Column()
-   emoji: string; 
+   @Field({nullable: true})
+   @Column({nullable: true})
+   emoji?: string; 
  }
  

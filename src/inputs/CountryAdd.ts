@@ -10,5 +10,5 @@ export class AddCountryInput implements Partial<Country>{
    name: string;
 
    @Field({ nullable: true })
-   emoji: string;    
+   emoji?: string;    
 }
