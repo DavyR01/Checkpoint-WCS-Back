@@ -26,5 +26,9 @@ import {
    @Field({nullable: true})
    @Column({nullable: true})
    emoji?: string; 
+
+   @Field()
+   @Column({default: ""})
+   continent: string; 
  }
  
