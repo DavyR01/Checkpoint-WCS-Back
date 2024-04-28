@@ -5,6 +5,7 @@ const dataSource = new DataSource({
   type: "sqlite",
   database: "db_checkpoint.sqlite",
   entities: ["src/entities/*.ts"],
+  // entities: [Country],
   synchronize: true,
     logging: ["query", "error"],
   // type: "postgres",
@@ -12,7 +13,6 @@ const dataSource = new DataSource({
   // port: 5432,
   // username: "postgres",
   // password: "checkpoint",
-  // entities: [Country],
 });
 
 export default dataSource;
