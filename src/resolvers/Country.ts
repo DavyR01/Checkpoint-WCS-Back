@@ -56,4 +56,10 @@ export class CountryResolver {
       console.log('delete country OK');
       return countryToDelete
    }
+
+   @Mutation(() => Country)
+   async updateOneCountry(@Arg("id") idToUpdate: number) {
+      // const countryToUpdate = await Country.
+   }
+
 }
