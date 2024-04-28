@@ -1,5 +1,6 @@
+import { AddCountryInput } from "../inputs/CountryAdd";
 import { Country } from "../entities/country";
-import { Arg, Query, Resolver } from "type-graphql";
+import { Arg, Mutation, Query, Resolver } from "type-graphql";
 
 @Resolver()
 export class CountryResolver {
@@ -15,5 +16,13 @@ export class CountryResolver {
             code
          }
       })
+   }
+
+   @Mutation(() => Country)
+   async addOneCountry(@Arg("data") newCountry: AddCountryInput): Promise<Country> {
+      const country = Country.save({
+         ...newCountry
+      })
+      return country
    }
 }
