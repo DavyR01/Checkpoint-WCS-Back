@@ -3,7 +3,7 @@ import { DataSource } from "typeorm";
 
 const dataSource = new DataSource({
   type: "sqlite",
-  database: "db_checkpoint.sqlite",
+  database: "src/db_checkpoint.sqlite",
   entities: ["src/entities/*.ts"],
   // entities: [Country],
   synchronize: true,
