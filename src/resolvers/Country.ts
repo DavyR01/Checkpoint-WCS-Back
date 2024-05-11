@@ -115,4 +115,24 @@ export class CountryResolver {
    }
 
 
+   // @Mutation(() => Country)
+   // async updateOneCountry3(
+   //    @Arg("id") idToUpdate: number,
+   //    @Arg("data") data: UpdateCountryInput) {
+   //    const countryToUpdate = await Country.findOneByOrFail(
+   //       {id: idToUpdate}
+   //    )
+   //    if (!countryToUpdate) {
+   //       throw new Error ('Error during update the country !!')
+   //    }
+
+   //    const newData: any = {...data};
+   //    newData.code = {id: data.code}
+
+   //    // Object.assign(countryToUpdate, data)
+   //    return await Country.save({idToUpdate, ...newData})
+   //    // return countryToUpdate
+   // }
+
+
 }
