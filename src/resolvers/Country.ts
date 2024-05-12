@@ -10,6 +10,16 @@ export class CountryResolver {
       return await Country.find();
    }
 
+   @Query(() => [String])
+   async getAllContinents() {
+      const continents = await Country.createQueryBuilder()
+         .select("DISTINCT continent")
+         .getRawMany();
+
+      return continents.map(continent => continent.continent);
+   }
+
+
    @Query(() => Country)
    async getOneCountryByCode(@Arg("code", { defaultValue: "FR" }) code: string): Promise<Country | null> {
       const country = await Country.findOne({
